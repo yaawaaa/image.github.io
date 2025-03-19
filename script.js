@@ -18,19 +18,21 @@ async function recognizeImage() {
     try {
         result.textContent = "Loading model...";
 
-        // Load the MobileNet model
+        // Load the model and warm it up
         const model = await mobilenet.load();
+        await model.classify(tf.zeros([1, 224, 224, 3])); // Warm-up step
+
         result.textContent = "Analyzing image...";
 
-        // Wait for the image to load before processing
         previewImage.onload = async () => {
-            // Make a prediction
+            // Classify the image
             const predictions = await model.classify(previewImage);
 
-            // Display the top prediction
             if (predictions.length > 0) {
-                result.textContent = `Prediction: ${predictions[0].className} 
-                (Confidence: ${(predictions[0].probability * 100).toFixed(2)}%)`;
+                result.innerHTML = `
+                    <strong>Prediction:</strong> ${predictions[0].className} <br>
+                    <strong>Confidence:</strong> ${(predictions[0].probability * 100).toFixed(2)}%
+                `;
             } else {
                 result.textContent = "No prediction found.";
             }
