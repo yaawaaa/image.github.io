@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Recognizer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- TensorFlow.js and MobileNet -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Image Recognizer</h1>
+        <input type="file" accept="image/*" id="imageInput" />
+        <button onclick="recognizeImage()">Recognize Image</button>
+        <div class="preview">
+            <img id="previewImage" />
+        </div>
+        <p id="result"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
